@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["DaprDemoApp.csproj", "."]
-RUN dotnet restore "DaprDemoApp.csproj"
+COPY ["DaprDemoApp/DaprDemoApp.csproj", "DaprDemoApp/"]
+RUN dotnet restore "DaprDemoApp/DaprDemoApp.csproj"
 COPY . .
- 
+WORKDIR "/src"
 RUN dotnet build "DaprDemoApp.csproj" -c Release -o /app/build
 
 FROM build AS publish

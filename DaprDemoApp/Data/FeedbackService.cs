@@ -45,7 +45,7 @@ namespace DaprDemoApp.Data
             {
                  string daprPort= Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
                 _logger.LogInformation("dapper port  " + daprPort);
-                var responsePingService = await client.GetAsync("http://localhost:" + daprPort + "/v1.0/invoke/feedbackapi/method/Feedback/Ping");
+                var responsePingService = await client.GetAsync("http://localhost:" + daprPort + "/v1.0/invoke/daprdemoapi/method/Feedback/Ping");
                 //              ;
                  _logger.LogInformation(responsePingService.Content.ToString());
                 //if (responsePingService.IsSuccessStatusCode)
@@ -54,12 +54,12 @@ namespace DaprDemoApp.Data
                 //    return true;
                 //}
 
-                var response = await client.PostAsync("http://localhost:" + daprPort + "/v1.0/publish/messagebus/ReceiveFeedback",
-                               httpContent);
+                //var response = await client.PostAsync("http://localhost:" + daprPort + "/v1.0/publish/messagebus/ReceiveFeedback",
+                //               httpContent);
 
 
-                //var response = await client.PostAsync("http://localhost:" + daprPort + "/v1.0/invoke/feedbackapi/method/Feedback/ReceiveFeedback",
-                //               new StringContent(JsonSerializer.Serialize(userData.FirstName)));
+                var response = await client.PostAsync("http://localhost:" + daprPort + "/v1.0/invoke/daprdemoapi/method/Feedback/ReceiveFeedback",
+                               new StringContent(JsonSerializer.Serialize(userData.FirstName)));
                 if (response.IsSuccessStatusCode)
                 {
                     _logger.LogInformation($"Posted message successfuly - {userData.FirstName}");

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daprdemoapp
+spec:
+  selector:
+    matchLabels:
+      app: daprdemoapp-pod
+    
+  template:
+    metadata:
+      labels:
+        app: daprdemoapp-pod
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "daprdemoapp"
+        dapr.io/app-port: "80"
+        dapr.io/log-level: "debug"
+    spec:
+      containers:
+      - name: daprdemoapp-container
+        image: daprdemoapp:v3
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
