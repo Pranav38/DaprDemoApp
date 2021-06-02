@@ -15,6 +15,7 @@ spec:
         dapr.io/enabled: "true"
         dapr.io/app-id: "daprdemoapp"
         dapr.io/app-port: "80"
+        dapr.io/app-protocol: "http"
         dapr.io/log-level: "debug"
     spec:
       containers:
